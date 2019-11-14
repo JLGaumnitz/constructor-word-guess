@@ -29,8 +29,9 @@ var question = [{
     message: "Guess a letter:",
     // Filter to change any uppercase inputs to lowercase
     filter: function (input) {
-       return input.toLowerCase();
+        return input.toLowerCase();
     },
+    // Ensures input is 1 character and not a number
     validate: function (input) {
         if ((input.length === 1) && !(Number(input))) {
             return true;
@@ -41,14 +42,15 @@ var question = [{
     }
 }]
 
-// Create an array to store the guessed letters from the user
+// Create an array to store the guessed letters from the user, set the number of guesses
 var guessedLetters = [];
 var word = randomWord();
 var guesses = 10;
 
 // Function to handle guessed letter
 function guessLetter() {
-    inquirer.prompt(question)
+    inquirer
+        .prompt(question)
         .then(function (response) {
             if (guessedLetters.includes(response.guessedLetter)) {
                 console.log("---------------------------------------------------" + "\nYou have already guessed " + FgYellow + response.guessedLetter + FgWhite + ". Try a different letter." + "\n---------------------------------------------------")
@@ -62,9 +64,10 @@ function guessLetter() {
                 var found = word.guess(guess);
                 var output = word.wordDisplay();
                 console.log(output.join(" "));
-                console.log("\nIncorrect guessed letters: " + guessedLetters.join(", "))
+                console.log("\nGuessed letters: " + guessedLetters.join(", "))
 
-                if (!found) {
+                // If want to only decrement on incorrect guess, could delete || found:
+                if (!found || found) {
                     guesses--
                 }
                 if ((guesses === 0) && (output.includes("_"))) {
@@ -82,11 +85,12 @@ function guessLetter() {
             }
         })
 }
-
-console.log(FgGreen + "\nWelcome to 'Bird is the Word' Guessing Game \nEach word is a type of bird. Type a single letter and press Enter to begin. \n" + FgWhite);
+// Message at start of game
+console.log(FgGreen + "\nWelcome to 'Bird is the Word' Guessing Game \nEach word is a type of bird. Type a single letter and press the Enter key to begin.  \n" + FgWhite);
 console.log(word.wordDisplay().join(" ") + "\n");
 console.log("\nGuesses left: " + FgCyan + guesses + FgWhite + "\n");
 
+// Call guessLetter function
 guessLetter();
 
 // Function to choose random word
