@@ -27,7 +27,11 @@ var question = [{
     type: "input",
     name: "guessedLetter",
     message: "Guess a letter:",
-    validate: function(input) {
+    // Filter to change any uppercase inputs to lowercase
+    filter: function (input) {
+       return input.toLowerCase();
+    },
+    validate: function (input) {
         if ((input.length === 1) && !(Number(input))) {
             return true;
         } else {
@@ -45,7 +49,7 @@ var guesses = 10;
 // Function to handle guessed letter
 function guessLetter() {
     inquirer.prompt(question)
-        .then(function(response) {
+        .then(function (response) {
             if (guessedLetters.includes(response.guessedLetter)) {
                 console.log("---------------------------------------------------" + "\nYou have already guessed " + FgYellow + response.guessedLetter + FgWhite + ". Try a different letter." + "\n---------------------------------------------------")
                 console.log(word.wordDisplay().join(" "));

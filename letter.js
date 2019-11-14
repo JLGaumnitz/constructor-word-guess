@@ -9,8 +9,9 @@
 //   * A function that takes a character as an argument and checks it against the underlying character, updating the stored boolean value to true if it was guessed correctly
 
 // **HINT:** If you name your letter's display function `toString`, JavaScript will call that function automatically whenever casting that object to a string (check out this example: <https://jsbin.com/facawetume/edit?js,console>)
+// ==================================================================================================================
 
-
+// Constructor function that first inserts _ for each letter (because guessed is false for all letters at first) and then replaces the _ with a letter when it is correctly guessed. 
 function Letter(letter) {
     this.letter = letter;
     this.guessed = false;
@@ -29,4 +30,5 @@ function Letter(letter) {
     }
   }
   
+  //Exports the Letter constructor, making it available to any file requiring this file.
   module.exports = Letter;
