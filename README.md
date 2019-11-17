@@ -32,6 +32,7 @@ Losing the Game:
 ![Image of Win](/images/Lost_Bird_is_Word_Game.PNG)
 
 Quitting the Game:
+
 ![Image of Win](/images/Quit_Bird_is_Word_Game.PNG)
 
 
