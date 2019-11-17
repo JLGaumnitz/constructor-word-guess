@@ -10,34 +10,34 @@
 // Uses the letter.js file
 var Letter = require("./letter.js")
 
-// Constructor function that will take in the random word, split it into letters, and push the letters to an array of letters ...
+// Constructor function that takes in the random word, splits it into letters, and pushes the letters to an array  and ...
 function Word(word) {
   var splitword = word.split("");
   var wordArray = [];
-  splitword.forEach(function (element) {
-    var letter = new Letter(element);
+  splitword.forEach(function (character) {
+    var letter = new Letter(character);
     wordArray.push(letter);
   })
-  // ...return a string representing the word ...
+  // ...returns a string representing the word and ...
   this.stringWord = word;
   this.word = wordArray;
   this.wordDisplay = function () {
     var display = [];
-    this.word.forEach(function (element) {
-      display.push(element.display());
+    this.word.forEach(function (character) {
+      display.push(character.display());
     })
     return display;
   }
-  // ... and take a character as an argument and call the guess function on each letter object and determines if the letter was found or not
+  // ... calls the guess function, checking each letter to determine if the letter was found in the word or not (using the forEach method)
   this.guess = function (letter) {
     var found = false;
-    this.word.forEach(function (element) {
-      if (element.check(letter)) {
+    this.word.forEach(function (character) {
+      if (character.check(letter)) {
         found = true;
       }
     })
     return found;
   }
 }
-//Exports the Word constructor, making it available to any file requiring this file.
+//Export the Word constructor, making it available to any file requiring this file.
 module.exports = Word;

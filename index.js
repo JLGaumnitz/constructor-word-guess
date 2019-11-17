@@ -14,7 +14,7 @@ var Word = require("./word.js");
 // Array of bird names
 var birdNames = ["owl", "hawk", "parakeet", "crane", "vulture", "eagle", "swan", "bluebird", "hummingbird", "ostrich", "pigeon", "dove", "heron", "toucan", "meadowlark", "pelican", "wren", "emu", "chicken", "robin", "puffin", "albatross", "parrot", "penguin", "sparrow", "bunting", "chickadee", "falcon", "grouse", "kiwi", "magpie", "osprey", "peacock", "turkey", "finch", "cormorant", "woodpecker", "cockatoo", "quail", "partridge", "pheasant", "flamingo", "crow", "raven"];
 
-// Text colors (from this Stack Overflow post: https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color)
+// Text and background colors (learned from this Stack Overflow post: https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color)
 var FgWhite = "\x1b[0m";
 var FgCyan = "\x1b[36m";
 var FgGreen = "\x1b[32m";
@@ -22,7 +22,7 @@ var FgYellow = "\x1b[33m";
 var BgRed = "\x1b[41m";
 var BgBlue = "\x1b[44m";
 
-// Set up the array for the inquirer input
+// Set up the variable called "question" with an array for the inquirer input
 var question = [{
     type: "input",
     name: "guessedLetter",
@@ -31,13 +31,13 @@ var question = [{
     filter: function (input) {
         return input.toLowerCase();
     },
-    // Ensures input is 1 character and not a number
+    // Validation to ensure input is 1 character and is a letter
     validate: function (input) {
-        if ((input.length === 1) && !(Number(input))) {
+        if ((input.length === 1) && (!/[^a-zA-Z]/.test(input))) {
             return true;
         } else {
-            return false;
-            console.log("\n")
+            return (console.log("\n" + "Please input a single letter." + "\n")
+            )
         }
     }
 }]
@@ -66,7 +66,7 @@ function guessLetter() {
                 console.log(output.join(" "));
                 console.log("\nGuessed letters: " + guessedLetters.join(", "))
 
-                // If want to only decrement on incorrect guess, could delete || found:
+                // If I want to only decrement on incorrect guess, I could delete "|| found":
                 if (!found || found) {
                     guesses--
                 }
@@ -86,7 +86,7 @@ function guessLetter() {
         })
 }
 // Message at start of game
-console.log(FgGreen + "\nWelcome to 'Bird is the Word' Guessing Game \nEach word is a type of bird. Type a single letter and press the Enter key to begin.  \n" + FgWhite);
+console.log(FgYellow + "\nWelcome to 'Bird is the Word' Guessing Game \nEach word is a type of bird. Type a single letter and press the 'Enter' key to begin.  \n" + FgWhite);
 console.log(word.wordDisplay().join(" ") + "\n");
 console.log("\nGuesses left: " + FgCyan + guesses + FgWhite + "\n");
 
@@ -109,6 +109,7 @@ function playAgain() {
         }])
         .then(function (response) {
             if (response.gameContinue === true) {
+                // Reset the word and the guess count
                 word = randomWord();
                 guesses = 10;
                 guessedLetters = [];
