@@ -11,11 +11,12 @@ GitHub repository: https://github.com/JLGaumnitz/constructor-word-guess
 Constructor Word Guess Game is a command line node app that takes in a letter at a time, checks it against the letters in a randomly selected word (from a pre-set array of bird names), and displays whether the guessed letter was part of the word or not, and decrements a guess from the guess count (which starts at 10). 
 
 There are three JavaScript files: 
-*letter.js sets up the Letter constructor and displays an underlying character or an underscore, depending on whether or not the user has guessed the letter.
 
-*word.js requires letter.js and sets up the Word constructor, which sets up the word that the user is attempting to guess.
+* letter.js sets up the Letter constructor and displays an underlying character or an underscore, depending on whether or not the user has guessed the letter.
 
-*index.js contains the logic of the game. It requires word.js. It randomly selects a word and uses the Word constructor to store it. It prompts the user for each guess and keeps track of the user's remaining guesses.
+* word.js requires letter.js and sets up the Word constructor, which sets up the word that the user is attempting to guess.
+
+* index.js contains the logic of the game. It requires word.js. It randomly selects a word and uses the Word constructor to store it. It prompts the user for each guess and keeps track of the user's remaining guesses.
 
 Once you have the app prepared (see below), type "node index.js" in the command line. When prompted, input a letter to begin guessing the word. There are 10 guesses per word (both correct and incorrect guesses decrement the guess count).
 
